@@ -1,0 +1,13 @@
+_build/
+target/
+.rebar3
+ebin/
+*.beam
+rebar.lock
+so-path
+.DS_Store
+*.swp
+*.swo
+*~
+.idea/
+*.iml

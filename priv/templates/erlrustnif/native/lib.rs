@@ -12,4 +12,4 @@ fn hello() -> Atom {
     atom::ok()
 }
 
-rustler::init!("erlrustniftemplate");
+rustler::init!("{{name}}");

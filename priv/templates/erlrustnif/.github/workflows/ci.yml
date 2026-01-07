@@ -25,16 +25,11 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Install template
-        run: |
-          mkdir -p ~/.config/rebar3/templates
-          cp -r ${{ github.workspace }}/priv/templates/erlrustnif ~/.config/rebar3/templates/
-
       - name: Create project from template
         run: |
-          mkdir -p /tmp
           cd /tmp
           rebar3 new erlrustnif testproj
+          cd testproj
 
       - name: Run tests
         run: |

@@ -1,4 +1,4 @@
--module(erlrustniftemplate).
+-module({{name}}).
 
 -on_load(load/0).
 
@@ -26,12 +26,12 @@ load() ->
             {error, bad_name} ->
                 case filelib:is_dir(filename:join(["..", priv])) of
                     true ->
-                        filename:join(["..", priv, libnative]);
+                        filename:join(["..", priv, "lib{{name}}-native"]);
                     _ ->
-                        filename:join([priv, libnative])
+                        filename:join([priv, "lib{{name}}-native"])
                 end;
             Dir ->
-                filename:join(Dir, libnative)
+                filename:join(Dir, "lib{{name}}-native")
         end,
     case erlang:load_nif(SoName, 0) of
         ok ->
