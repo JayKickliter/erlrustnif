@@ -1,75 +1,79 @@
-# Erlang NIF Template
+# erlrustnif
 
-A reusable template for building Erlang NIF (Native Implemented Function) projects using Rust and Rustler.
+A [rebar3](https://www.rebar3.org/) template for building [Erlang
+NIF](https://www.erlang.org/doc/man/erl_nif.html) (Native Implemented
+Function) projects with Rust using [Rustler](https://rustler.rs/).
 
-This template provides a complete, production-ready scaffolding with minimal boilerplate code that compiles out of the box.
+Scaffold Erlang/Rust hybrid projects with a single `rebar3` command.
 
-## Using This Template
+## Installation
 
-This template uses `erlrustniftemplate` as a placeholder name. To use it for your project:
+### Option 1: global rebar3 plugin
 
-1. Clone or copy this repository to your new project location
-2. Find and replace all occurrences of `erlrustniftemplate` with your actual project name:
-   - In file names: `src/erlrustniftemplate.erl` → `src/yourname.erl`
-   - In file names: `src/erlrustniftemplate.app.src` → `src/yourname.app.src`
-   - In file names: `test/erlrustniftemplate_test.erl` → `test/yourname_test.erl`
-   - In file contents: All references to `erlrustniftemplate` in code
-3. Add your Rust dependencies to `Cargo.toml`
-4. Implement your NIFs in `native/nifs.rs` (or split across multiple files)
-5. Write your Erlang API in `src/yourname.erl`
-6. Add tests in `test/`
+Add the following to your global `rebar3` configuration at `~/.config/rebar3/rebar.config`:
 
-## Building
-
-### Requirements
-
-- Erlang/OTP 27+
-- Rust (stable toolchain)
-- rebar3
-
-### Commands
-
-```bash
-# Build the project
-rebar3 compile
-
-# Run tests
-rebar3 eunit
-
-# Format code
-make format
-
-# Run all checks (dialyzer, tests, format, docs, clippy)
-make ci
-
-# Clean build artifacts
-make clean
+```erlang
+{plugins, [
+    {erlrustnif, {git, "https://github.com/JayKickliter/erlang-rust-nif-template.git", {branch, "main"}}}
+]}.
 ```
 
-## Structure
+### Option 2: manual installation
 
-- `native/` - Rust/Rustler NIF implementation
-- `src/` - Erlang application and modules
-- `test/` - EUnit tests
-- `priv/` - Compiled shared library (generated)
-- `.cargo/` - Cargo build configuration (platform-specific flags)
-- `.github/workflows/` - CI/CD configuration
+Copy the template directory to your `rebar3` templates location:
 
-## Development
+```bash
+cp -r priv/templates/erlrustnif ~/.config/rebar3/templates/
+```
 
-The template includes:
+## Creating a new project
 
-- Rust: Minimal NIF that returns `:ok` to verify compilation
-- Erlang: NIF loader that handles `.so` discovery and loading
-- Tests: Simple EUnit test to verify the NIF loads correctly
-- CI: GitHub Actions workflows for Linux and macOS
+```bash
+rebar3 new erlrustnif myproject
+cd myproject
+rebar3 compile
+rebar3 eunit
+```
 
-## Important Notes
+## What You Get
 
-- The `rustler::init!()` macro in `native/lib.rs` must match your Erlang module name
-- The NIF loader in the Erlang module automatically finds the compiled `.so` file in `priv/`
-- The build process uses cargo pre-hooks in `rebar.config` to integrate Rust compilation
+Each generated project includes:
+
+- Erlang module with NIF loader and public API
+- Rust NIF implementation using Rustler framework
+- EUnit tests
+- GitHub Actions workflows for macOS and Linux
+- Automatic Rust compilation via `rebar3`
+- Code quality tools: dialyzer, erlfmt, clippy, rustfmt
+
+## Key Features
+
+Rust crates are named `{{name}}-native` to avoid naming collisions in
+workspaces.
+
+Automatically detects the platform (Linux, macOS, Windows) and
+generates appropriate library extensions.
+
+Pre-compile hooks automatically build Rust code with `cargo build
+--release`, copy the compiled library to `priv/` with `.so` extension,
+and load the NIF on module initialization.
+
+The Erlang module automatically discovers the compiled native library
+from multiple locations, working both in development and when
+installed as a package.
+
+Includes testing, code quality checks, CI/CD pipelines, and
+documentation generation.
+
+## Requirements
+
+Generated projects require:
+
+- Erlang/OTP: 27 or later
+- Rust: Stable toolchain
+- `rebar3`: 3.24.0 or later
 
 ## License
 
-Apache-2.0
+Dual licensed under [Apache License 2.0](LICENSE-APACHE) or [MIT
+license](LICENSE-MIT) at your option.

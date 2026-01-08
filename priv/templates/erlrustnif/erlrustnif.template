@@ -1,0 +1,28 @@
+{description, "Erlang NIF project with Rust integration using Rustler"}.
+
+{variables, [
+    {name, "erlrustnifproj", "Name of the project (used for module, app, and Rust crate names)"}
+]}.
+
+{dir, "native"}.
+{dir, "priv"}.
+{dir, "src"}.
+{dir, "test"}.
+{dir, ".cargo"}.
+{dir, ".github/workflows"}.
+
+{file, ".cargo/config.toml", "{{name}}/.cargo/config.toml"}.
+{file, ".github/workflows/ci.yml", "{{name}}/.github/workflows/ci.yml"}.
+{file, ".gitignore", "{{name}}/.gitignore"}.
+{file, "Makefile", "{{name}}/Makefile"}.
+{file, "README.md", "{{name}}/README.md"}.
+{file, "priv/.gitignore", "{{name}}/priv/.gitignore"}.
+
+{template, "Cargo.toml", "{{name}}/Cargo.toml"}.
+{template, "native/Cargo.toml", "{{name}}/native/Cargo.toml"}.
+{template, "native/build.rs", "{{name}}/native/build.rs"}.
+{template, "native/lib.rs", "{{name}}/native/lib.rs"}.
+{template, "rebar.config", "{{name}}/rebar.config"}.
+{template, "src/name.app.src", "{{name}}/src/{{name}}.app.src"}.
+{template, "src/name.erl", "{{name}}/src/{{name}}.erl"}.
+{template, "test/name_test.erl", "{{name}}/test/{{name}}_test.erl"}.

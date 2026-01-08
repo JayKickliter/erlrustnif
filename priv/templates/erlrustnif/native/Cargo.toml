@@ -1,0 +1,13 @@
+[package]
+build   = "build.rs"
+edition = "2021"
+name    = "{{name}}-native"
+version = "0.1.0"
+
+[lib]
+crate-type = ["dylib"]
+name       = "{{name}}_native"
+path       = "lib.rs"
+
+[dependencies]
+rustler = "0.36"

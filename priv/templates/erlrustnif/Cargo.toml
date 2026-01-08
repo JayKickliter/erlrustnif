@@ -1,12 +1,12 @@
 [package]
 build   = "native/build.rs"
 edition = "2021"
-name    = "native"
+name    = "{{name}}-project"
 version = "0.1.0"
 
 [lib]
 crate-type = ["dylib"]
-name       = "native"
+name       = "{{name}}_native"
 path       = "native/lib.rs"
 
 [dependencies]
