@@ -14,7 +14,7 @@ Add the following to your global `rebar3` configuration at `~/.config/rebar3/reb
 
 ```erlang
 {plugins, [
-    {erlrustnif, {git, "https://github.com/JayKickliter/erlang-rust-nif-template.git", {branch, "main"}}}
+    {erlrustnif, {git, "https://github.com/JayKickliter/erlrustnif.git", {branch, "main"}}}
 ]}.
 ```
 
